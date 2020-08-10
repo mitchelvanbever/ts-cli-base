@@ -1,0 +1,65 @@
+{
+  "name": "re-lease",
+  "version": "0.0.1",
+  "description": "release and changelog generator for project using conventional commits",
+  "main": "build/index.js",
+  "module": "build/index.es.js",
+  "typings": "build/index.d.ts",
+  "files": [
+    "build"
+  ],
+  "author": "Mitchel van Bever",
+  "license": "MIT",
+  "scripts": {
+    "build": "rimraf build && tsc -p tsconfig.json",
+    "start": "node build/index.js",
+    "commit": "./node_modules/cz-customizable/standalone.js",
+    "lint": "eslint --ext .ts --ext .tsx ./src"
+  },
+  "dependencies": {
+    "@types/inquirer": "^7.3.0",
+    "chalk": "^4.1.0",
+    "inquirer": "^7.3.3",
+    "rollup-plugin-json": "^4.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@typescript-eslint/eslint-plugin": "^2.15.0",
+    "@typescript-eslint/parser": "^2.15.0",
+    "babel-eslint": "^10.0.3",
+    "cz-customizable": "git+https://github.com/storyofams/tools-cz-customizable.git",
+    "eslint": "^6.8.0",
+    "eslint-config-ams": "storyofams/eslint-config-ams.git",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-jest": "^23.6.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^2.3.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.7.4"
+  },
+  "eslintConfig": {
+    "extends": [
+      "ams"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{md,json,yaml,yml}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}
