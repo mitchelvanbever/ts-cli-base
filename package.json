@@ -1,7 +1,7 @@
 {
-  "name": "re-lease",
+  "name": "ts-cli-base",
   "version": "0.0.1",
-  "description": "release and changelog generator for project using conventional commits",
+  "description": "typescript base setup for CLI projects",
   "main": "build/index.js",
   "module": "build/index.es.js",
   "typings": "build/index.d.ts",
@@ -11,7 +11,8 @@
   "author": "Mitchel van Bever",
   "license": "MIT",
   "scripts": {
-    "build": "rimraf build && tsc -p tsconfig.json",
+    "clean": "rimraf build",
+    "build": "yarn clean && tsc",
     "start": "node build/index.js",
     "commit": "./node_modules/cz-customizable/standalone.js",
     "lint": "eslint --ext .ts --ext .tsx ./src"
@@ -20,7 +21,7 @@
     "@types/inquirer": "^7.3.0",
     "chalk": "^4.1.0",
     "inquirer": "^7.3.3",
-    "rollup-plugin-json": "^4.0.0"
+    "module-alias": "^2.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
@@ -45,6 +46,9 @@
     "extends": [
       "ams"
     ]
+  },
+  "_moduleAliases": {
+    "~lib": "build/lib"
   },
   "husky": {
     "hooks": {
